@@ -3,4 +3,5 @@
     <string name="add_button">Add button</string>
     <string name="screen_title_list">Tasks</string>
     <string name="icon_search_tasks">Search Tasks</string>
+    <string name="icon_sort_tasks">Sort Tasks</string>
 </resources>
