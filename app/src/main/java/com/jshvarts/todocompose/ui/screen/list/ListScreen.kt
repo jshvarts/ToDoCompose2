@@ -16,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import com.jshvarts.todocompose.R
 import com.jshvarts.todocompose.ui.theme.fabBackgroundColor
 import com.jshvarts.todocompose.ui.viewmodel.SharedViewModel
+import com.jshvarts.todocompose.util.RequestState
 import com.jshvarts.todocompose.util.SearchAppBarState
 
 @ExperimentalMaterialApi
@@ -32,8 +33,10 @@ fun ListScreen(
     }
 
     val allTasks by sharedViewModel.allTasks.collectAsState()
-    for (task in allTasks) {
-        Log.d("ListScreen", task.title)
+    (allTasks as? RequestState.Success)?.let {
+        for (task in it.data) {
+            Log.d("ListScreen", task.title)
+        }
     }
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
