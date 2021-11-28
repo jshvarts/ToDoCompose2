@@ -41,20 +41,39 @@ import com.jshvarts.todocompose.ui.theme.TOP_APP_BAR_HEIGHT
 import com.jshvarts.todocompose.ui.theme.Typography
 import com.jshvarts.todocompose.ui.theme.topAppBarBackgroundColor
 import com.jshvarts.todocompose.ui.theme.topAppBarContentColor
+import com.jshvarts.todocompose.ui.viewmodel.SharedViewModel
+import com.jshvarts.todocompose.util.SearchAppBarState
 
 @Composable
-fun ListAppBar() {
-    DefaultListAppBar(
-        onSearchClicked = {},
-        onSortClicked = {},
-        onDeleteClicked = {}
-    )
-//    SearchAppBar(
-//        text = "",
-//        onTextChange = {},
-//        onCloseClicked = {},
-//        onSearchClicked = {}
-//    )
+fun ListAppBar(
+    sharedViewModel: SharedViewModel,
+    searchAppBarState: SearchAppBarState,
+    searchTextState: String
+) {
+    when (searchAppBarState) {
+        SearchAppBarState.CLOSED -> {
+            DefaultListAppBar(
+                onSearchClicked = {
+                    sharedViewModel.searchAppBarState.value = SearchAppBarState.OPENED
+                },
+                onSortClicked = {},
+                onDeleteClicked = {}
+            )
+        }
+        else -> {
+            SearchAppBar(
+                text = searchTextState,
+                onTextChange = { newText ->
+                    sharedViewModel.searchTextState.value = newText
+                },
+                onCloseClicked = {
+                    sharedViewModel.searchAppBarState.value = SearchAppBarState.CLOSED
+                    sharedViewModel.searchTextState.value = ""
+                },
+                onSearchClicked = {}
+            )
+        }
+    }
 }
 
 @Composable
