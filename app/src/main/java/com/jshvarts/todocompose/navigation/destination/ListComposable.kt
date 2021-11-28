@@ -9,7 +9,7 @@ import com.jshvarts.todocompose.util.Constants.LIST_ARG_KEY
 import com.jshvarts.todocompose.util.Constants.LIST_SCREEN
 
 fun NavGraphBuilder.listComposable(
-    navigateToTaskScreen: (Int) -> Unit
+    navigateToTaskScreen: (taskId: Int) -> Unit
 ) {
     composable(
         route = LIST_SCREEN,
