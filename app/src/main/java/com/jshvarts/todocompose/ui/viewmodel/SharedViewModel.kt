@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.jshvarts.todocompose.data.models.Priority
 import com.jshvarts.todocompose.data.models.ToDoTask
 import com.jshvarts.todocompose.data.repository.ToDoRepository
+import com.jshvarts.todocompose.util.Action
 import com.jshvarts.todocompose.util.Constants.MAX_TITLE_LENGTH
 import com.jshvarts.todocompose.util.RequestState
 import com.jshvarts.todocompose.util.SearchAppBarState
@@ -21,6 +22,8 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor(
     private val repository: ToDoRepository
 ) : ViewModel() {
+
+    val action: MutableState<Action> = mutableStateOf(Action.NO_ACTION)
 
     val id: MutableState<Int> = mutableStateOf(0)
     val title: MutableState<String> = mutableStateOf("")
@@ -82,5 +85,28 @@ class SharedViewModel @Inject constructor(
 
     fun validateFields(): Boolean {
         return title.value.isNotEmpty() && description.value.isNotEmpty()
+    }
+
+    fun handleAction(action: Action) {
+        when (action) {
+            Action.ADD -> addTask()
+            Action.UPDATE -> {}
+            Action.DELETE -> {}
+            Action.DELETE_ALL -> {}
+            Action.UNDO -> {}
+            else -> {}
+        }
+        this.action.value = Action.NO_ACTION
+    }
+
+    private fun addTask() {
+        viewModelScope.launch {
+            val toDoTask = ToDoTask(
+                title = title.value,
+                description = description.value,
+                priority = priority.value
+            )
+            repository.addTask(toDoTask)
+        }
     }
 }
