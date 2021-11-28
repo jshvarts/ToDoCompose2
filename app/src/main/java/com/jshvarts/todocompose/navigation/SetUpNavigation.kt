@@ -1,5 +1,6 @@
 package com.jshvarts.todocompose.navigation
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
@@ -9,6 +10,7 @@ import com.jshvarts.todocompose.navigation.destination.taskComposable
 import com.jshvarts.todocompose.ui.viewmodel.SharedViewModel
 import com.jshvarts.todocompose.util.Constants.LIST_SCREEN
 
+@ExperimentalMaterialApi
 @Composable
 fun SetUpNavigation(
     navController: NavHostController,

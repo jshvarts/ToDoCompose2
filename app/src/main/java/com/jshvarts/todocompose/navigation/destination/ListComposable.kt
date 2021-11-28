@@ -1,5 +1,6 @@
 package com.jshvarts.todocompose.navigation.destination
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -9,6 +10,7 @@ import com.jshvarts.todocompose.ui.viewmodel.SharedViewModel
 import com.jshvarts.todocompose.util.Constants.LIST_ARG_KEY
 import com.jshvarts.todocompose.util.Constants.LIST_SCREEN
 
+@ExperimentalMaterialApi
 fun NavGraphBuilder.listComposable(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     sharedViewModel: SharedViewModel
