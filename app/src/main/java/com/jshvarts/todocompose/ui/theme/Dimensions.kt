@@ -8,3 +8,5 @@ val PADDING_SMALL = 6.dp
 
 val PRIORITY_INDICATOR_SIZE = 16.dp
 val TOP_APP_BAR_HEIGHT = 56.dp // from material.io
+
+val TASK_ITEM_ELEVATION = 2.dp

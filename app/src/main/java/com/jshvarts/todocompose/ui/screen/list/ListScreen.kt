@@ -30,7 +30,9 @@ fun ListScreen(
                 searchTextState = searchTextState
             )
         },
-        content = {},
+        content = {
+            ListContent()
+        },
         floatingActionButton = {
             // FAB is added to standard location in bottom right
             ListFab(onFabClicked = navigateToTaskScreen)
