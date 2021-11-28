@@ -3,7 +3,7 @@ package com.jshvarts.todocompose.di
 import android.content.Context
 import androidx.room.Room
 import com.jshvarts.todocompose.data.ToDoDatabase
-import com.jshvarts.todocompose.ui.util.Constants
+import com.jshvarts.todocompose.util.Constants
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
