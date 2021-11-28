@@ -8,4 +8,6 @@
     <string name="placeholder_text_search">Search</string>
     <string name="description_search_icon">Search Icon</string>
     <string name="description_close_icon">Close Icon</string>
+    <string name="sad_face_icon">Sad Face Icon</string>
+    <string name="no_tasks_found">No tasks found.</string>
 </resources>
