@@ -17,4 +17,5 @@
     <string name="dropdown_arrow_icon">Dropdown arrow icon</string>
     <string name="task_title">Title</string>
     <string name="task_description">Description</string>
+    <string name="ok_button_text">OK</string>
 </resources>
