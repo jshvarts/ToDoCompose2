@@ -43,6 +43,7 @@ import com.jshvarts.todocompose.ui.theme.topAppBarBackgroundColor
 import com.jshvarts.todocompose.ui.theme.topAppBarContentColor
 import com.jshvarts.todocompose.ui.viewmodel.SharedViewModel
 import com.jshvarts.todocompose.util.SearchAppBarState
+import com.jshvarts.todocompose.util.TrailingIconState
 
 @Composable
 fun ListAppBar(
@@ -205,6 +206,10 @@ fun SearchAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
+    var trailingIconState: TrailingIconState by remember {
+        mutableStateOf(TrailingIconState.READY_TO_DELETE)
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -244,7 +249,22 @@ fun SearchAppBar(
             },
             trailingIcon = {
                 IconButton(
-                    onClick = { onCloseClicked() }
+                    onClick = {
+                        when (trailingIconState) {
+                            TrailingIconState.READY_TO_DELETE -> {
+                                onTextChange("")
+                                trailingIconState = TrailingIconState.READY_TO_CLOSE
+                            }
+                            TrailingIconState.READY_TO_CLOSE -> {
+                                if (text.isNotEmpty()) {
+                                    onTextChange("")
+                                } else {
+                                    onCloseClicked()
+                                    trailingIconState = TrailingIconState.READY_TO_DELETE
+                                }
+                            }
+                        }
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Close,
