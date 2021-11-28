@@ -15,6 +15,9 @@ fun ListScreen(
     navigateToTaskScreen: (Int) -> Unit
 ) {
     Scaffold(
+        topBar = {
+            ListAppBar()
+        },
         content = {},
         floatingActionButton = {
             // FAB is added to standard location in bottom right
