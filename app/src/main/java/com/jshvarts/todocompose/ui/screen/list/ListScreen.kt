@@ -7,6 +7,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.SnackbarResult
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.rememberScaffoldState
@@ -52,6 +53,9 @@ fun ListScreen(
     DisplaySnackBar(
         scaffoldState = scaffoldState,
         handleAction = { sharedViewModel.handleAction(action) },
+        onUndoClicked = {
+          sharedViewModel.action.value = it
+        },
         action = action,
         taskTitle = sharedViewModel.title.value
     )
@@ -99,6 +103,7 @@ fun ListFab(
 fun DisplaySnackBar(
     scaffoldState: ScaffoldState,
     handleAction: () -> Unit,
+    onUndoClicked: (Action) -> Unit,
     action: Action,
     taskTitle: String
 ) {
@@ -109,9 +114,14 @@ fun DisplaySnackBar(
     LaunchedEffect(key1 = action) {
         if (action != Action.NO_ACTION) {
             scope.launch {
-                val snackBarResult = scaffoldState.snackbarHostState.showSnackbar(
+                val snackbarResult = scaffoldState.snackbarHostState.showSnackbar(
                     message = "${action.name}: $taskTitle",
-                    actionLabel = "OK"
+                    actionLabel = setActionLabel(action)
+                )
+                undoDeletedTask(
+                    action = action,
+                    snackbarResult = snackbarResult,
+                    onUndoClicked = onUndoClicked
                 )
             }
         }
@@ -119,6 +129,22 @@ fun DisplaySnackBar(
 
 }
 
+private fun setActionLabel(action: Action): String {
+    return if (action == Action.DELETE) {
+        "UNDO"
+    } else "OK"
+}
+
+private fun undoDeletedTask(
+    action: Action,
+    snackbarResult: SnackbarResult,
+    onUndoClicked: (Action) -> Unit
+) {
+    if (snackbarResult == SnackbarResult.ActionPerformed && action == Action.DELETE) {
+        onUndoClicked(Action.UNDO)
+    }
+
+}
 //@Composable
 //@Preview
 //private fun ListScreenPreview() {
