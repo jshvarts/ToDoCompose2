@@ -21,7 +21,6 @@ import com.jshvarts.todocompose.R
 import com.jshvarts.todocompose.ui.theme.fabBackgroundColor
 import com.jshvarts.todocompose.ui.viewmodel.SharedViewModel
 import com.jshvarts.todocompose.util.Action
-import com.jshvarts.todocompose.util.RequestState
 import com.jshvarts.todocompose.util.SearchAppBarState
 import kotlinx.coroutines.launch
 
@@ -41,11 +40,7 @@ fun ListScreen(
     val action by sharedViewModel.action
 
     val allTasks by sharedViewModel.allTasks.collectAsState()
-    (allTasks as? RequestState.Success)?.let {
-        for (task in it.data) {
-            Log.d("ListScreen", task.title)
-        }
-    }
+    val searchedTasks by sharedViewModel.searchTasks.collectAsState()
     val searchAppBarState: SearchAppBarState by sharedViewModel.searchAppBarState
     val searchTextState: String by sharedViewModel.searchTextState
     val scaffoldState: ScaffoldState = rememberScaffoldState()
@@ -71,7 +66,9 @@ fun ListScreen(
         },
         content = {
             ListContent(
-                tasks = allTasks,
+                allTasks = allTasks,
+                searchedTasks = searchedTasks,
+                searchAppBarState = searchAppBarState,
                 navigateToTaskScreen = navigateToTaskScreen
             )
         },
