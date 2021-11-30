@@ -24,7 +24,11 @@ fun NavGraphBuilder.taskComposable(
         })
     ) { navBackStackEntry ->
         val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARG_KEY)
-        sharedViewModel.getSelectedTask(taskId)
+        // do not call functions that change state of our app directly from Composable functions
+        // instead, call those functions from LaunchedEffect
+        LaunchedEffect(key1 = taskId) {
+            sharedViewModel.getSelectedTask(taskId)
+        }
         val selectedTask by sharedViewModel.selectedTask.collectAsState()
 
         LaunchedEffect(key1 = selectedTask) {
