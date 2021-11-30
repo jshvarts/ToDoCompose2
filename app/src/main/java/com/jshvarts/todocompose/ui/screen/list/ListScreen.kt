@@ -1,6 +1,7 @@
 package com.jshvarts.todocompose.ui.screen.list
 
 import android.util.Log
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
@@ -24,6 +25,7 @@ import com.jshvarts.todocompose.util.Action
 import com.jshvarts.todocompose.util.SearchAppBarState
 import kotlinx.coroutines.launch
 
+@ExperimentalAnimationApi
 @ExperimentalMaterialApi
 @Composable
 fun ListScreen(
