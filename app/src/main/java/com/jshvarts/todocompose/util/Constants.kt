@@ -5,6 +5,7 @@ object Constants {
     const val DATABASE_NAME = "todo_database"
 
     // composable screen: route name slash composable argument:
+    const val SPLASH_SCREEN = "splash"
     const val LIST_SCREEN = "list/{action}"
     const val TASK_SCREEN = "task/{taskId}"
 
@@ -17,4 +18,6 @@ object Constants {
     const val PREFERENCE_KEY = "sort_state"
 
     const val SWIPE_TO_DELETE_ANIMATION_DURATION = 300
+
+    const val SPLASH_SCREEN_DELAY = 2000L
 }
