@@ -30,7 +30,7 @@ fun TaskScreen(
     val context = LocalContext.current
 
     BackHandler(onBackPressed = { navigateToListScreen(Action.NO_ACTION) })
-    
+
     Scaffold(
         topBar = {
             TaskAppBar(

@@ -158,7 +158,6 @@ class SharedViewModel @Inject constructor(
             Action.UNDO -> addTask()
             else -> {}
         }
-        this.action.value = Action.NO_ACTION
     }
 
     private fun addTask() {
