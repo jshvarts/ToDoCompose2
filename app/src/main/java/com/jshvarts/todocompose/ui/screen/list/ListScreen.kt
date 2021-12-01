@@ -1,6 +1,5 @@
 package com.jshvarts.todocompose.ui.screen.list
 
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FloatingActionButton
@@ -33,13 +32,6 @@ fun ListScreen(
     navigateToTaskScreen: (taskId: Int) -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    LaunchedEffect(
-        key1 = true
-    ) {
-        Log.d("ListScreen", "LaunchedEffect triggered")
-        sharedViewModel.getAllTasks()
-        sharedViewModel.readSortState()
-    }
 
     LaunchedEffect(key1 = action) {
         sharedViewModel.handleAction(action)
