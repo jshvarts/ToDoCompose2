@@ -39,9 +39,27 @@ interface ToDoDao {
     /**
      * Priority will be stored as strings (HIGH, MEDIUM, LOW)
      */
-    @Query("SELECT * FROM todo_table ORDER BY CASE WHEN priority LIKE 'L%' THEN 1 WHEN priority LIKE 'M%' THEN 2 WHEN priority LIKE 'H%' THEN 3 END")
+    @Query(
+        """
+        SELECT * FROM todo_table ORDER BY
+    CASE
+        WHEN priority LIKE 'L%' THEN 1
+        WHEN priority LIKE 'M%' THEN 2
+        WHEN priority LIKE 'H%' THEN 3
+    END
+    """
+    )
     fun sortByLowPriority(): Flow<List<ToDoTask>>
 
-    @Query("SELECT * FROM todo_table ORDER BY CASE WHEN priority LIKE 'H%' THEN 1 WHEN priority LIKE 'M%' THEN 2 WHEN priority LIKE 'L%' THEN 3 END")
+    @Query(
+        """
+        SELECT * FROM todo_table ORDER BY
+    CASE
+        WHEN priority LIKE 'H%' THEN 1
+        WHEN priority LIKE 'M%' THEN 2
+        WHEN priority LIKE 'L%' THEN 3
+    END
+    """
+    )
     fun sortByHighPriority(): Flow<List<ToDoTask>>
 }
